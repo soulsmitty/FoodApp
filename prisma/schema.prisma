@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model PantryItem {
+  id          String   @id @default(cuid())
+  userId      String   @default("warrior-king")
+  name        String
+  category    String
+  quantity    Float    @default(1)
+  unit        String   @default("item")
+  imageUrl    String?
+  barcode     String?
+  healthGrade String   @default("B")
+  gradeScore  Int      @default(70)
+  calories    Float    @default(0)
+  protein     Float    @default(0)
+  carbs       Float    @default(0)
+  fat         Float    @default(0)
+  fiber       Float    @default(0)
+  sugar       Float    @default(0)
+  sodium      Float    @default(0)
+  addedAt     DateTime @default(now())
+  expiresAt   DateTime?
+  notes       String?
+
+  @@index([userId])
+}
+
+model FoodLog {
+  id          String   @id @default(cuid())
+  userId      String   @default("warrior-king")
+  date        String
+  foodName    String
+  category    String   @default("other")
+  mealType    String   @default("snack")
+  servingSize Float    @default(100)
+  servingUnit String   @default("g")
+  calories    Float    @default(0)
+  protein     Float    @default(0)
+  carbs       Float    @default(0)
+  fat         Float    @default(0)
+  fiber       Float    @default(0)
+  sugar       Float    @default(0)
+  healthGrade String   @default("B")
+  loggedAt    DateTime @default(now())
+
+  @@index([userId, date])
+}
+
+model ScanHistory {
+  id               String   @id @default(cuid())
+  userId           String   @default("warrior-king")
+  foodName         String
+  category         String
+  scanType         String   @default("vision")
+  barcode          String?
+  imageUrl         String?
+  healthGrade      String
+  gradeScore       Int
+  calories         Float    @default(0)
+  protein          Float    @default(0)
+  carbs            Float    @default(0)
+  fat              Float    @default(0)
+  fiber            Float    @default(0)
+  qualityNote      String?
+  topHack          String?
+  addedToPantry    Boolean  @default(false)
+  scannedAt        DateTime @default(now())
+
+  @@index([userId])
+}
+
+model MacroGoals {
+  id       String @id @default(cuid())
+  userId   String @unique @default("warrior-king")
+  calories Int    @default(2800)
+  protein  Int    @default(200)
+  carbs    Int    @default(250)
+  fat      Int    @default(80)
+  fiber    Int    @default(35)
+
+  updatedAt DateTime @updatedAt
+}
