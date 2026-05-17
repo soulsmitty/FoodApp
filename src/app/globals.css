@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: #080808;
+    --surface: #111111;
+    --card: #191919;
+    --border: #2a2a2a;
+    --gold: #f59e0b;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #080808;
+    color: #f5f5f5;
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #111;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #f59e0b;
+  }
+
+  ::selection {
+    background: rgba(245, 158, 11, 0.25);
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-brand-card border border-brand-border rounded-2xl;
+    background: linear-gradient(145deg, #1e1e1e 0%, #141414 100%);
+  }
+
+  .gold-glow {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+  }
+
+  .grade-ring {
+    @apply flex items-center justify-center rounded-full font-bold text-xl;
+    width: 56px;
+    height: 56px;
+    border-width: 3px;
+    border-style: solid;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200;
+    @apply text-zinc-400 hover:text-zinc-100 hover:bg-white/5;
+  }
+
+  .nav-link.active {
+    @apply text-brand-gold bg-amber-500/10;
+  }
+
+  .macro-bar {
+    @apply h-2 rounded-full overflow-hidden bg-brand-muted;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #f59e0b, #fcd34d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
